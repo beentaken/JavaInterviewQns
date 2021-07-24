@@ -17,9 +17,6 @@ public class CharactersCount  {
         return "\"" + this.name + "\" has " + this.distinctCharacterCount + " distinct characters.";
     }
 
-    public void name(Object temp) {
-       this.name = (String) temp;
-    }
 
 
 }
