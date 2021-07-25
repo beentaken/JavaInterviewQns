@@ -4,60 +4,56 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class RacingCar {
 
 
     public static int minMoves(List<Integer> obstacles){
-        int[][] arr = new int[obstacles.size()][obstacles.size()];
-        int[] startingArr = new int[obstacles.size()];
-        startingArr[0]= 0;
-        startingArr[1]= 1;
-        startingArr[2]= 0;
-        System.out.println(Arrays.toString(startingArr));
-        for(int i = 0; i  < arr.length; i++){
-            int temp =  obstacles.get(i);
-            for(int j=0; j< arr[i].length; j++){
-                if(temp == 1){
-                    arr[i][0] = 1;
-                }
-                if(temp == 2){
-                    arr[i][1] = 1;
-                }
-                if(temp == 3){
-                    arr[i][2] = 1;
-                }
-                System.out.print(arr[i][j] + "\t");
+        int moves = 0;
+        int currentLane = 2;
+        int nextDiffObstacle = 0;
 
+        for(int i =0; i < obstacles.size(); i++ ){
+            if (obstacles.get(i) == currentLane){
+                for (int nextObstacle: obstacles.subList(i, obstacles.size())) {
+
+                        if(nextObstacle != currentLane){
+                            nextDiffObstacle = nextObstacle;
+                            break;
+                        }
+                }
+                if(nextDiffObstacle == 0){
+                    int[] arr = {1,2,3};
+                    List<Integer> laneList = Arrays.stream(arr).boxed().collect(Collectors.toList());
+                    List<Integer> currentList = new ArrayList<>();
+                    currentList.add(currentLane);
+                    laneList.removeAll(currentList);
+                    currentLane = laneList.get(0);
+                }else{
+                    int[] arr = {1,2,3};
+                    List<Integer> laneList = Arrays.stream(arr).boxed().collect(Collectors.toList());
+                    List<Integer> currentList = new ArrayList<>();
+                    currentList.add(currentLane);
+                    currentList.add(nextDiffObstacle);
+                    laneList.removeAll(currentList);
+                    currentLane = laneList.get(0);
+                }
+                moves++;
 
             }
-            System.out.println("");
         }
-        int count = 0;
-        for(int i = 0; i  < arr.length; i++){
-
-            for(int j=0; j< arr[i].length; j++) {
-
-                if(arr[i][j] == startingArr.find[1]){
-
-                    System.out.print(i + " " + j);
-                    if(j !=startingArr[1]){
-                        count++;
-                    }else{
-                        System.out.println("hit obstacle");
-                    }
-                }
-            }
-        }
-        return 0;
+        return moves;
     }
 
 
     public static void main(String[] args) {
         List<Integer> obstacles = new ArrayList<>();
-        obstacles.add(1);
         obstacles.add(2);
+        obstacles.add(1);
         obstacles.add(3);
-        minMoves(obstacles);
+        obstacles.add(2);
+        int moves = minMoves(obstacles);
+        System.out.println(moves);
     }
 }
