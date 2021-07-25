@@ -38,7 +38,7 @@ public class RacingCar {
 
             for(int j=0; j< arr[i].length; j++) {
 
-                if(arr[i][j] == startingArr.find[1]){
+                if(arr[i][j] == startingArr[1]){
 
                     System.out.print(i + " " + j);
                     if(j !=startingArr[1]){
