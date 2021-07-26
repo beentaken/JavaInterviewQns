@@ -3,27 +3,24 @@ package com.company;
 public class BetterCompression {
 
     public static  int compress(char[] chars){
-        int index = 0;
-        int i = 0 ;
-        while ( i < chars.length) {
-            int j = i;
-            while ( j < chars.length && chars[j] == chars[i]){
-                j++;
+        int indexAns = 0, index = 0;
+        while(index < chars.length){
+            char currentChar = chars[index];
+            int count = 0;
+            while(index < chars.length && chars[index] == currentChar){
+                index++;
+                count++;
             }
-            chars[index++] = chars[i];
-            if( j- i > 1){
-                String count = j - i + "";
-                for(char c: count.toCharArray()){
-                    chars[index] = c;
-                }
-            }
-            i= j;
+            chars[indexAns++] = currentChar;
+            if(count != 1)
+                for(char c : Integer.toString(count).toCharArray())
+                    chars[indexAns++] = c;
         }
-        return index;
+        return indexAns;
     }
 
     public static void main(String[] args) {
-        char[] chars = {'a','a', 'b','c','c','c','d','d'};
+        char[] chars = {'a','a', 'b','b','a','a','a','a'};
         System.out.println(compress(chars));
     }
 }
