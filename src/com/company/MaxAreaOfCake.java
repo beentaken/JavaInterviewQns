@@ -43,6 +43,7 @@ public class MaxAreaOfCake {
         }
         i = 0;
         Iterator it2 = vSet.iterator();
+
         while (it2.hasNext()) {
             vList[i++] = (int)it2.next();
         }
@@ -67,6 +68,10 @@ public class MaxAreaOfCake {
 
         // Print largest volume
         largestArea = maxV * maxH;
+
+
+
+
 
 
 
