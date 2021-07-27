@@ -14,6 +14,7 @@ public class UniversityCareerFair {
             input.add(new Pair(arrival.get(i),duration.get(i)+arrival.get(i)));
         }
         Collections.sort(input, Comparator.comparingInt(Pair::getValue));
+
         int max = 0;
         int end = 0;
         for(int i=0;i<input.size();i++){
